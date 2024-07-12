@@ -140,7 +140,9 @@ export class Service {
         conf.appwriteBucketId,
         fileId
     )
+    // It will return us a URL
   }
+
 
 }
 

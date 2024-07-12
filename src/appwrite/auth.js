@@ -21,7 +21,11 @@ export class AuthService {
         name
       );
       if (userAccount) {
-        // Get the user Logged in!
+        // If the userAccount already exists, then get the user Logged in! 
+        // NOOO, this upper statement is wrong. See 14:38 of L20 of chai aur react playlist.
+        // The concept flow is:- If the userAccount is not null, means the user is created, 
+        // then get the user logged in also hand in hand, else, if the userAccount is null
+        // then return the UserAccount as of now. We eill see later, what has happened.
         return this.login({ email, password });
       } else {
         return userAccount;
@@ -51,7 +55,7 @@ export class AuthService {
   }
 
   async logout() {
-    try {
+    try { 
         await this.account.deleteSessions();
     } catch (error) {
         console.log("Appwrite service :: logout :: error", error);
