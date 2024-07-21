@@ -6,6 +6,7 @@ import authService from "../appwrite/auth";
 import { login } from "../store/authSlice";
 import Button from "./Button";
 import Input from "./Input";
+import Logo from "./Logo";
 
 function Signup() {
   const navigate = useNavigate();

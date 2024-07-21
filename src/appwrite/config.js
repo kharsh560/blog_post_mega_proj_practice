@@ -52,7 +52,7 @@ export class Service {
     }
   }
 
-  async deletePost() {
+  async deletePost(slug) {
     try {
       return await this.databases.deleteDocument(
         conf.appwriteDatabaseId,
@@ -66,9 +66,10 @@ export class Service {
     }
   }
 
+  // For a single post
   async getPost(slug) {
     try {
-      await this.databases.getDocument(
+      return await this.databases.getDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         slug
@@ -93,6 +94,7 @@ export class Service {
   //     }
   //   }
 
+  // For all the posts
   async getPosts() {
     // No parameter needed. Like "slug"
     // Because we need all the posts, we are just applying a "query" onto them.
@@ -101,6 +103,7 @@ export class Service {
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         [Query.equal("status", "active")]
+        // This upper line, sir wrote it inside the getPosts' parenthesis.
       );
     } catch (error) {
       console.log("error in getPosts of Appwrite service", error);
@@ -111,39 +114,31 @@ export class Service {
 
   async uploadFile(file) {
     try {
-        return await this.bucket.createFile(
-            conf.appwriteBucketId,
-            ID.unique(),
-            file
-        )
+      return await this.bucket.createFile(
+        conf.appwriteBucketId,
+        ID.unique(),
+        file
+      );
     } catch (error) {
-        console.log("error in uploadFile of Appwrite service", error);
-        return false;
+      console.log("error in uploadFile of Appwrite service", error);
+      return false;
     }
   }
 
   async deleteFile(fileId) {
     try {
-        await this.bucket.deleteFile(
-            conf.appwriteBucketId,
-            fileId
-        )
-        return true;
+      await this.bucket.deleteFile(conf.appwriteBucketId, fileId);
+      return true;
     } catch (error) {
-        console.log("error in deleteFile of Appwrite service", error);
-        return false;
+      console.log("error in deleteFile of Appwrite service", error);
+      return false;
     }
   }
 
   getFilePreview(fileId) {
-    return this.bucket.getFilePreview(
-        conf.appwriteBucketId,
-        fileId
-    )
+    return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
     // It will return us a URL
   }
-
-
 }
 
 const service = new Service();
