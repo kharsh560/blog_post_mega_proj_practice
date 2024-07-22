@@ -4,12 +4,15 @@ import conf from "../config/conf";
 export class AuthService {
   client = new Client();
   account;
+  // users;
 
   constructor() {
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
+    // .setKey(conf.appwriteGetAllUsersApi);
     this.account = new Account(this.client);
+    // this.users = new Users(this.client);
   }
 
   async createAccount({ email, password, name }) {
@@ -42,6 +45,10 @@ export class AuthService {
       throw error;
     }
   }
+  // NOTE: More about login:-
+  // The createEmailPasswordSession method in Appwrite is used to create a session for a user
+  // by logging them in with their email and password. When the login is successful, it returns
+  // a session object that contains several properties related to the session and the user.
 
   async getCurrentUser() {
     try {
@@ -58,6 +65,9 @@ export class AuthService {
     }
     return null;
   }
+
+  // NOTE: Making service for getting all the users.
+  // So as I can mention the author's name beneath the postCard in AllPost page.
 
   async logout() {
     try {

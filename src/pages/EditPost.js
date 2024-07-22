@@ -7,7 +7,10 @@ function EditPost() {
   const [post, setPost] = useState([]);
   // When user will click the "edit post" then from the URL we need to fetch the "slug"
   // And to extract any value from URL we can use "useParams()" from react router dom.
+  // useParams is a hook provided by react-router-dom that allows you to access the parameters of the current route. This is particularly useful for dynamic routing, where parts of the URL are used as variables. Here’s how it works and how you can use it in your React application.
+
   const { slug } = useParams();
+  console.log(slug);
   const navigate = useNavigate();
 
   useEffect(() => {

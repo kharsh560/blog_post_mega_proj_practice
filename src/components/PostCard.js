@@ -1,10 +1,18 @@
 import React from "react";
+// import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 // import appwriteService from "../appwrite/config"
 // import authService from "../appwrite/auth";
 import service from "../appwrite/config";
 
-function PostCard({ $id, title, featuredImage }) {
+function PostCard({ $id, title, featuredImage, userId }) {
+
+  // const userData = useSelector((state) => state.auth.userData);
+  // let postAuthor;
+  // if (userData.$id === userId) {
+  //   postAuthor = userData.name;
+  // }
+
   return (
     <Link to={`/post/${$id}`}>
       {/* In Appwrite, the id is named as "$id" only. Can't do anything about it. */}

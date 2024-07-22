@@ -49,7 +49,6 @@ function Footer() {
                     Affiliate Program
                   </Link>
                 </li>
-                
               </ul>
             </div>
           </div>
@@ -83,7 +82,6 @@ function Footer() {
                     Contact Us
                   </Link>
                 </li>
-                
               </ul>
             </div>
           </div>

@@ -59,7 +59,8 @@ export class Service {
         conf.appwriteCollectionId,
         slug
       );
-      return true; // In order to handel it in the frontend.
+      // return true; 
+      // In order to handel it in the frontend.
     } catch (error) {
       console.log("error in deletePost of Appwrite service", error);
       return false; // In order to handel it in the frontend.

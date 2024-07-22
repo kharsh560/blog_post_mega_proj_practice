@@ -15,6 +15,7 @@ function Login() {
   const [error, setError] = useState("");
 
   const login = async (data) => {
+    // Note: The data inside login fxn is coming from register and handleSubmit of useForm!
     setError(""); // Cleaning the error state!
     try {
       await authService.login(data).then(async (session) => {

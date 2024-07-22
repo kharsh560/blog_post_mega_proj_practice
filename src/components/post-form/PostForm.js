@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import service from "../../appwrite/config";
-import { Button, Input, Select, RTE } from "../index"
+import { Button, Input, Select, RTE } from "../index";
 
 function PostForm({ post }) {
+  // Initializing useForm
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: {
@@ -17,8 +18,22 @@ function PostForm({ post }) {
     });
 
   const navigate = useNavigate();
-  // const userData = useSelector(state => state.user.userData); + Mistakenly, sir wrote "user.userData" +
+
+  /* NOTE:  This code was hindering "Edit" button in the "Post" page!!!
+  {post && (
+          <div className="w-full mb-4">
+            <img
+              src={service.getFilePreview(post.featuredImage)}
+              alt={post.title}
+              className="rounded-lg"
+            />
+          </div>
+        )}
+  */
+  //  NOTE: But, don't know how, its started to work again!!!!!!!!!!!
+
   const userData = useSelector((state) => state.auth.userData);
+  // const userData = useSelector(state => state.user.userData); + Mistakenly, sir wrote "user.userData" +
 
   const submit = async (data) => {
     // NOTE: This "data" ofcourse would be an object and it conatins stuffs from the RTE and image.
@@ -50,7 +65,7 @@ function PostForm({ post }) {
 
       if (file) {
         const fileId = file.$id;
-        // Note: Here, everythong is "$id" as like in mongoDB, everything is "_id"
+        // Note: Here, everything is "$id" as like in mongoDB, everything is "_id"
         data.featuredImage = fileId;
         // NOTE: Q) See line no. 26 :- There, its "data.image" but here in line 53, its "data.featuredImage".....How?
 
