@@ -37,29 +37,30 @@ function Header() {
   ];
 
   return (
-    <header className="py-3 shadow bg-gray-500">
+    <header className="bg-gradient-to-r from-yellow-800 via-blue-700 to-red-700 p-4">
       <Container>
-        <nav className="flex">
+        <nav className="flex text-lg font-semibold">
           {/* Logo */}
           <div className="mr-4">
             <Link to="/">
-              <Logo width="70px" />
+              <Logo />
             </Link>
           </div>
           {/* Other buttons */}
           <ul className="flex ml-auto">
             {/* Looping through the array "navItems" */}
-            {navItems.map((item) =>
-              item.active ? ( // If its "true" => Means the user is logged in, then, show this object's name as a button.
-                <li key={item.name}>
-                  <button
-                    onClick={() => navigate(item.slug)}
-                    className="inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full"
-                  >
-                    {item.name}
-                  </button>
-                </li>
-              ) : null // Else if the user is not logged in, then show nothing.
+            {navItems.map(
+              (item) =>
+                item.active ? ( // If its "true" => Means the user is logged in, then, show this object's name as a button.
+                  <li key={item.name}>
+                    <button
+                      onClick={() => navigate(item.slug)}
+                      className="inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full"
+                    >
+                      {item.name}
+                    </button>
+                  </li>
+                ) : null // Else if the user is not logged in, then show nothing.
             )}
             {authStatus && (
               <li>
@@ -68,6 +69,10 @@ function Header() {
             )}
           </ul>
         </nav>
+        <div
+          className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-transparent to-transparent"
+          style={{ filter: "blur(8px)", transform: "scaleY(0.5)" }}
+        />
       </Container>
     </header>
   );

@@ -47,23 +47,21 @@ export default function Post() {
       }
     });
   };
-
+  
   return post ? (
-    <div className="py-8">
-      <Container>
-        <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+    <div className="py-8 bg-animated min-h-screen flex justify-center">
+      <div className="bg-gray-100 bg-opacity-50 rounded-xl p-4 backdrop-blur-md w-3/4">
+        <div className="w-full flex justify-center mb-4 relative  p-2">
           <img
             src={service.getFilePreview(post.featuredImage)}
             alt={post.title}
-            className="rounded-xl"
+            className="rounded-xl w-[500px]"
           />
 
           {isAuthor && (
-            <div className="absolute right-6 top-6">
+            <div className="absolute right-6 flex flex-col items-center gap-2">
               <Link to={`/edit-post/${post.$id}`}>
-                <Button bgColor="bg-green-500" className="mr-3">
-                  Edit
-                </Button>
+                <Button bgColor="bg-green-500">Edit</Button>
               </Link>
               <Button bgColor="bg-red-500" onClick={deletePost}>
                 Delete
@@ -75,7 +73,7 @@ export default function Post() {
           <h1 className="text-2xl font-bold">{post.title}</h1>
         </div>
         <div className="browser-css">{parse(post.content)}</div>
-      </Container>
+      </div>
     </div>
   ) : null;
 }

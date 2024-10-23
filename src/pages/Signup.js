@@ -4,7 +4,12 @@ import { Signup as SignupComponent } from "../components/index";
 
 
 function Signup() {
-  return <div className=" py-8"> <SignupComponent /> </div>;
+  return (
+    <div className="bg-animated  py-8">
+      {" "}
+      <SignupComponent />{" "}
+    </div>
+  );
   // Note: "S" in SignUpComponent should be capital, as its a component to be rendered. 
 }
 

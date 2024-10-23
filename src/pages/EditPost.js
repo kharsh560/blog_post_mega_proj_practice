@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../appwrite/config";
-import { Container, Postform } from "../components/index";
+import { Postform } from "../components/index";
 
 function EditPost() {
   const [post, setPost] = useState([]);
@@ -10,9 +10,9 @@ function EditPost() {
   // useParams is a hook provided by react-router-dom that allows you to access the parameters of the current route. This is particularly useful for dynamic routing, where parts of the URL are used as variables. Here’s how it works and how you can use it in your React application.
 
   const { slug } = useParams();
-  console.log(slug);
+  // console.log(slug);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     if (slug) {
       service.getPost(slug).then((post) => {
@@ -26,12 +26,10 @@ function EditPost() {
       navigate("/");
     }
   }, [navigate, slug]);
-
+  console.log("Here is the: ", post);
   return post ? (
-    <div className="py-8">
-      <Container>
-        <Postform post={post} />
-      </Container>
+    <div>
+      <Postform post={post} />
     </div>
   ) : null;
 }

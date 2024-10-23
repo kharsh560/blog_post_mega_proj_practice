@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../appwrite/auth";
 import { login as storeLogin } from "../store/authSlice"; // See 22:49 for why we names "login" as storeLogin // Sir called it "authLogin"
@@ -13,6 +13,8 @@ function Login() {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm(); // From react hook form.
   const [error, setError] = useState("");
+  const userDataInStore = useSelector((state) => state.auth.userData);
+  // console.log(userDataInStore);
 
   const login = async (data) => {
     // Note: The data inside login fxn is coming from register and handleSubmit of useForm!
@@ -22,8 +24,11 @@ function Login() {
         if (session) {
           const userData = await authService.getCurrentUser();
           if (userData) {
+            console.log(userData);
             dispatch(storeLogin(userData));
+            console.log(userDataInStore);
             navigate("/");
+            // setTimeout(() => navigate("/"), 0);
           }
         }
       });
@@ -31,20 +36,32 @@ function Login() {
       setError(e.message);
     }
   };
+  // const userData = useSelector((state) => state.auth.userData);
+  // useEffect(() => {
+  //   if (userData) {
+  //     console.log(userData);
+  //   }
+  // }, [userData]);
+  // useEffect(() => {
+  //   if (userData) {
+  //     // Perform actions when user is updated in the store
+  //     console.log(userData);
+  //   }
+  // }, [userData]); // 'user' is the state obtained from Redux store
 
   return (
     <div className="flex items-center justify-center w-full">
       <div
-        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
+        className={`mx-auto w-full max-w-lg rounded-xl p-10 bg-gray-100 bg-opacity-50  backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.8)]`}
       >
         <div className="mb-2 flex justify-center">
           <Logo width="100%" />
           {/* <span className="inline-block w-full max-w-[100px]">
-            [Bai matlab ka de diya tha ye!!]
+            [Bina matlab ka de diya tha ye!!]
           </span> */}
         </div>
         <h2 className="text-center text-2xl font-bold leading-tight">
-          Sign in to your account
+          Log in to your account
         </h2>
         <p className="mt-2 text-center text-base text-black/60">
           Don&apos;t have any account?&nbsp;

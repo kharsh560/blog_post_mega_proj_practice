@@ -5,6 +5,7 @@ import service from "../appwrite/config";
 
 function AllPosts() {
   const [posts, setPosts] = useState([]);
+  
   useEffect(() => {
     service.getPosts().then((posts) => {
       if (posts) {
@@ -17,14 +18,21 @@ function AllPosts() {
 
   // 9:30 min se "return" part
   return (
-    <div className=" w-screen py-8 flex">
-      {posts.map((indvPost) => (
-        <div key={indvPost.$id} className=" p-2 w-1/4 ">
-          <PostCard {...indvPost} />
-          {/* Here we wrote "indvPost" like this because we defined the arguments of PostCard as seen below */}
-          {/* function PostCard({ $id, title, featuredImage })  */}
-        </div>
-      ))}
+    <div className="bg-animated min-h-screen w-screen py-4 ">
+      <div className="flex justify-center font-bold text-4xl pb-2">
+        <h1 className="w-fit bg-gradient-to-r from-blue-800 via-black to-red-700 bg-clip-text text-transparent">
+          All Blogs
+        </h1>
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        {posts.map((indvPost) => (
+          <div key={indvPost.$id} className=" h-fit p-2">
+            <PostCard {...indvPost} />
+            {/* Here we wrote "indvPost" like this because we defined the arguments of PostCard as seen below */}
+            {/* function PostCard({ $id, title, featuredImage })  */}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
